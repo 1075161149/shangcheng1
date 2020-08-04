@@ -1,6 +1,7 @@
 package ltd.newbee.mall.service.impl;
 
 import ltd.newbee.mall.common.ServiceResultEnum;
+import ltd.newbee.mall.controller.vo.NewBeeMallIndexCarouselVO;
 import ltd.newbee.mall.dao.CarouselMapper;
 import ltd.newbee.mall.entity.Carousel;
 import ltd.newbee.mall.service.NewBeeMallCarouselService;
@@ -65,5 +66,15 @@ public class NewBeeMallCarouselServiceImpl implements NewBeeMallCarouselService 
         }
         //删除数据
         return carouselMapper.deleteBatch(ids) > 0;
+    }
+
+    @Override
+    public List<NewBeeMallIndexCarouselVO> getCarouselsForIndex(int number) {
+        List<NewBeeMallIndexCarouselVO> newBeeMallIndexCarouselVOS = new ArrayList<>(number);
+        List<Carousel> carousels = carouselMapper.findCarouselsByNum(number);
+        if (!CollectionUtils.isEmpty(carousels)) {
+            newBeeMallIndexCarouselVOS = BeanUtil.copyList(carousels, NewBeeMallIndexCarouselVO.class);
+        }
+        return newBeeMallIndexCarouselVOS;
     }
 }

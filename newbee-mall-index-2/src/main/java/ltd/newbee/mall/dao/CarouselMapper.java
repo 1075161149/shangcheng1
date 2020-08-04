@@ -24,4 +24,6 @@ public interface CarouselMapper {
     int getTotalCarousels(PageQueryUtil pageUtil);
 
     int deleteBatch(Integer[] ids);
+
+    List<Carousel> findCarouselsByNum(@Param("number") int number);
 }
